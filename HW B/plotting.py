@@ -5,17 +5,17 @@ xValues = []
 yValues = []
 yValuesAvg = []
 
-with open('Rewards_a.csv') as csvfile:
+with open('Rewards_c.csv') as csvfile:
     lines = csv.reader(csvfile, delimiter=',')
     x = 1
     for row in lines:
         xValues.append(x)
         yValues.append(float(row[0]))
-        yValuesAvg.append(sum(yValues)/len(yValues)) # Moving average. 
+        yValuesAvg.append(sum(yValues[-100:])/len(yValues[-100:])) # SMA100. 
         x += 1
 
-plt.scatter(xValues, yValues, color = 'g', linestyle = 'dashed', marker = 'o', label = "Reward")
-plt.plot(xValues, yValuesAvg, color = 'r', linestyle = 'dotted', marker = 'v', label = "Average reward")
+plt.scatter(xValues, yValues, color = 'b', marker = '|', label = "Reward")
+plt.plot(xValues, yValuesAvg, color = 'r', linestyle = 'dashed', label = "SMA100")
   
 plt.xlabel('Episode $E$')
 plt.ylabel('Reward')
